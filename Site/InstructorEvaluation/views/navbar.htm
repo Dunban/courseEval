@@ -1,0 +1,61 @@
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <!--Mobile button-->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-list" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!--Logo-->
+      <a class="navbar-brand" id="navbar-logo" href="{{@siteAddress}}">GR TECH</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-list">
+      <ul class="nav navbar-nav">
+        <!--Logged in user navigation links-->
+        {~ if(!empty(@SESSION.userID)): ~}
+        <li>
+          <a href="{{@siteRoot.'/makeEvaluation'}}" class="">Create Evaluation</a>
+        </li>
+        <li>
+          <a href="{{@siteRoot.'/reports'}}">View Evaluations</a>
+        </li>
+        {~ endif~}
+        {~ if(@SESSION.permissions.2): ~}
+        <li>
+          <a href="{{@siteRoot.'/Instructor/CreateUser'}}">Add New User</a>
+        </li>
+        {~ endif~}
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <!--Social media buttons-->
+        <li>
+          <div id="social-media">
+            <a href="https://www.facebook.com/greenrivertechnologyprograms" target="_blank">
+              <img class="social-btn" src="{{@assets . '/img/social/facebook.png'}}" alt="facebook">
+            </a>
+            <a href="https://www.linkedin.com/groups/6781985" target="_blank">
+              <img class="social-btn" src="{{@assets . '/img/social/linkedin.png'}}" alt="linkedin">
+            </a>
+            <a href="https://instagram.com/greenrivertech/" target="_blank">
+              <img class="social-btn" src="{{@assets . '/img/social/instagram.png'}}" alt="instagram">
+            </a>
+          </div>
+        </li>
+        <!--Login/Logout links-->
+        {~ if(empty(@SESSION.userID)): ~}
+        <li>
+          <a href="{{@siteRoot.'/Login'}}">Login</a>
+        </li>
+        {~ else: ~}
+        <li>
+          <a href="{{@siteRoot.'/Logout'}}">Logout</a>
+        </li>
+        {~ endif ~}
+      </ul>
+    </div>
+  </div>
+</nav>

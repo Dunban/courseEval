@@ -1,0 +1,110 @@
+<div class="container well col-lg-12">
+	<div class="card">
+		<div class="row">
+			<h1 class='col-md-12 text-center'>
+			Evaluation for:
+			{{@evalInfo.name}}
+
+			</h1>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-4" id="evaluation-header-instructor">
+				<!--Evaluation code-->
+				 <p>View Evaluation at
+				   <a href="{{@siteRoot}}/evaluation/{{@evalInfo.code}}" target="_blank">
+					  evaluation/{{@evalInfo.code}}
+					</a>
+				</p>
+			</div>
+				<div class="col-xs-12 col-sm-4" id="evaluation-header-instructor">
+				<p class="text-center">
+					<!--Lock/Unlock-->
+					{~ if(@evalInfo.expirationDate > @date):~}
+					  <i class="fa fa-unlock" aria-hidden="true"></i> Open
+					  until  {{@evalInfo.expirationDate}}
+					{~ else: ~}
+					  <i class="fa fa-lock" aria-hidden="true"></i> Expired {{@evalInfo.expirationDate}}
+					{~ endif ~}
+				</p>
+			</div>
+			<div class="col-xs-12 col-sm-4" id="evaluation-header-course">
+				<p class="text-right">{{"" . @evalInfo.section}} {{" - " . @evalInfo.quarter . " Quarter "}}
+				 {{" - " . @evalInfo.year}}</p>
+			</div>
+		</div>
+
+
+		<repeat group="{{@evaluationQuestions}}" key="{{@questionNumber}}" value="{{ @question}}">
+
+			<div class="row-fluid form-group">
+				<h3 class='col-md-12 questionText'>{{ (@questionNumber + 1).": ". @question.questionText}}</h3>
+
+				{~ if(!@question.isFillIn): ~}
+
+				<div class="col-xs-12">
+
+							<div class="col-xs-6 col-md-1  text-right">
+								<strong>Almost&nbsp;Always:</strong>
+							</div>
+							<div class="col-xs-6 col-md-1 text-center">
+								{{@question.1}}
+							</div>
+
+							<div class="col-xs-6 col-md-1 text-right">
+								<strong>Often:</strong>
+							</div>
+							<div class="col-xs-6 col-md-1 text-center">
+								{{@question.2}}
+							</div>
+
+							<div class="col-xs-6 col-md-1 text-right">
+								<strong>Sometimes:</strong>
+							</div>
+							<div class="col-xs-6 col-md-1 text-center">
+								{{@question.3}}</div>
+
+							<div class="col-xs-6 col-md-1 text-right">
+								<strong>Rarely:</strong>
+							</div>
+							<div class="col-xs-6 col-md-1 text-center">
+								{{@question.4}}</div>
+
+							<div class="col-xs-6 col-md-1 text-right">
+								<strong>Almost&nbsp;Never:</strong>
+							</div>
+							<div class="col-xs-6 col-md-1 text-center">
+								{{@question.5}}</div>
+
+							<div class="col-xs-6 col-md-1 text-right">
+								<strong>N/A:</strong>
+							</div>
+							<div class="col-xs-6 col-md-1 text-center">
+								{{@question.6}}
+							</div>
+
+
+
+					</div>
+
+				{~ else: ~}
+				<div class="container-fluid">
+					<div class="striped col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+						<repeat group="{{@question.answers}}" value="{{@text}}">
+							<div class="row">
+								<div class="col-xs-12">
+									<p><strong>Student {{@text.coorelationID . ": "}}</strong>{{@text.textAnswer}}<p>
+								</div>
+							</div>
+						</repeat>
+					</div>
+				</div>
+				{~ endif ~}
+
+			</div>
+		</repeat>
+	</div>
+		<div class="col-lg-4">
+		<a class="btn btn-primary btn-lg" href="{{@siteRoot.'/reports'}}">View Evaluations</a>
+		</div>
+
+</div>
